@@ -100,7 +100,7 @@ body {
 }
 
 .toolbarlinks a {
-  font-family: Comic Sans MS;
+  font-family: Comic Sans MS, Helvetica;
   font-size: .9em;
   color:white;
   text-shadow: 1px 1px 1px #be5730;
