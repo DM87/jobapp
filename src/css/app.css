@@ -28,7 +28,7 @@ body {
   display:flex;
   flex-wrap: wrap;
   align-items: stretch;
-  overflow-y: scroll;
+  overflow-y: auto;
   justify-content: space-around;
 }
 
@@ -100,11 +100,16 @@ body {
 }
 
 .toolbarlinks a {
-  font-family: Helvetica, Comic Sans MS;
+  font-family: Comic Sans MS;
   font-size: .9em;
-  color:#bca41e;
+  color:white;
   text-shadow: 1px 1px 1px #be5730;
   padding: 10px;
+  font-style: italic;
+}
+
+.toolbarlinks a:hover{
+  color:#bca41e;
 }
 
 /*.modalimages {*/
@@ -125,7 +130,7 @@ body {
 @media only screen and (max-device-width: 480px) 
 {
   .instabox {
-  margin-top:140px;
-  max-height:390px;
+  margin-top:150px;
+  max-height:370px;
   }
 }

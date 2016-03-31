@@ -8,46 +8,27 @@ var Link = ReactRouter.Link;
 var IndexRoute = ReactRouter.IndexRoute;
 var browserHistory = ReactRouter.browserHistory;
 var EventEmitter = require('events');
-var hub = new EventEmitter()
+var hub = new EventEmitter();
 var $ = require('jquery');
 var Modal = require('react-modal');
 
 
-// The main application layout
-// this.props.children will be set by React Router depending on the current route
-
 
 var InstaBox = React.createClass({
-  // getInitialState: function(){
-  //   return ({
-  //     tag: "animals"
-  //     })
-  // },
-  // componentDidMount(){
-  //   hub.addListener("tag-request", this.TEST);
-  // },
-  // componentWillUnmount(){
-  //   hub.removeListener("tag-request");
-  // },
-  // TEST(x){
-  //   this.setState({
-  //     tag:x
-  //   })
-  // },
   render: function(){
     return (
       <div className="mainContent">
-        <CallTest />
+        <InstagramBox />
       </div>
-      )
+      );
   }
   
   
-})
+});
 
 
 
-var CallTest = React.createClass({
+var InstagramBox = React.createClass({
  getInitialState: function () {
         return {
           tag: "animals",
@@ -57,8 +38,8 @@ var CallTest = React.createClass({
         };
     },
     componentDidMount: function() {
-    this.LoadTags()
-    hub.addListener("tag-request", this.ChangeTag);
+      this.LoadTags();
+      hub.addListener("tag-request", this.ChangeTag);
     },
     
     componentWillUnmount(){
@@ -66,31 +47,31 @@ var CallTest = React.createClass({
     },
     
     LoadTags(){
-      var link = "https://crossorigin.me/https://api.instagram.com/v1/tags/"+ this.state.tag + "/media/recent?client_id=7fc34b3e0a1b458e867548097d3c7d5a"
-      var that = this
+      var link = "https://crossorigin.me/https://api.instagram.com/v1/tags/"+ this.state.tag + "/media/recent?client_id=7fc34b3e0a1b458e867548097d3c7d5a";
+      var that = this;
       this.serverRequest = $.get(link, function (result) {
-      console.log(result.data)
+      console.log(result.data);
       that.setState({
        files: result.data
-      })
-      })
+      });
+      });
     },
     
     ChangeTag(x){
-      console.log(x)
+      console.log(x);
     this.setState({
-      tag:x
-    },function(){
-      this.LoadTags()
-    })
+        tag:x
+      },function(){
+        this.LoadTags();
+      });
     },
     
     openModal: function(event,i) {
       
       var imageIndex = Number(i.split('$')[1].substring(0,2));
-      var ModalBackground = this.state.files[imageIndex].images.standard_resolution.url
+      var ModalBackground = this.state.files[imageIndex].images.standard_resolution.url;
       // var ModalText = this.state.files[imageIndex].caption.text
-      console.log(imageIndex)
+      console.log(imageIndex);
       this.setState({
         modalIsOpen: true,
         modalImage: ModalBackground,
@@ -118,13 +99,12 @@ var CallTest = React.createClass({
         border                : "none",
         padding               : "none"
       }
-    }
+    };
     return (
       <div className="instabox" onScroll={this.LoadTags}>
         {this.state.files.map((file,i) => (
-          <div
-          key={i}>
-          <img src={file.images.thumbnail.url} onClick={this.openModal}/>
+          <div key={i}>
+           <img src={file.images.thumbnail.url} onClick={this.openModal}/>
           </div>
           ))
         }
@@ -132,9 +112,9 @@ var CallTest = React.createClass({
         isOpen={this.state.modalIsOpen}
         onRequestClose={this.closeModal}
         style={customStyles} >
-        <div>
-          <img className="modalimages" src={this.state.modalImage} onClick={this.closeModal}/>
-        </div>
+          <div>
+            <img className="modalimages" src={this.state.modalImage} onClick={this.closeModal}/>
+          </div>
       </Modal>
       </div>
     );
@@ -144,11 +124,11 @@ var CallTest = React.createClass({
 var Menu = React.createClass({
   ChangeTag: function(x,e){
     if (e === ".0.0.0"){
-      hub.emit("tag-request", "animals")
+      hub.emit("tag-request", "animals");
     } else if (e === ".0.0.1"){
-      hub.emit("tag-request", "flowers")
+      hub.emit("tag-request", "flowers");
     } else if (e === ".0.0.2"){
-      hub.emit("tag-request", "people")
+      hub.emit("tag-request", "people");
     }
   },
   render: function(){
@@ -164,18 +144,18 @@ var Menu = React.createClass({
           <h2>#PEOPLE</h2>
         </div>
       </div>
-      )
+      );
   }
-})
+});
 
 var Deco = React.createClass({
   render(){
     return(
       <div className="dangleDeco">
         <img src="../css/images/character_5.png"/>
-      </div>)
+      </div>);
   }
-})
+});
 
 var LinkBar = React.createClass({
   render(){
@@ -187,9 +167,9 @@ var LinkBar = React.createClass({
         <a>MUSIC</a>
         <a href="http://www.itunes.com"><img src="../css/images/apple_store.png"/></a>
       </div>
-      )
+      );
   }
-})
+});
 
 var App = React.createClass({
   render: function() {
@@ -216,9 +196,6 @@ var NotFound = React.createClass({
   }
 });
 
-
-
-
 var routes = (
   <Router history={browserHistory}>
     <Route path="/" component={App}>
@@ -228,5 +205,4 @@ var routes = (
   </Router>
 );
 
-// If this line of code is not here, nothing gets displayed!
 ReactDOM.render(routes, document.querySelector('#app'));
