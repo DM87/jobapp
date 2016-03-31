@@ -106,6 +106,7 @@ body {
   text-shadow: 1px 1px 1px #be5730;
   padding: 10px;
   font-style: italic;
+  cursor: pointer;
 }
 
 .toolbarlinks a:hover{

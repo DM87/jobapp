@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+    "dev":  "webpack --watch",
+    "production": "webpack --config webpack.config.production.js"
+    "postinstall":"npm run production"
   },
   "repository": {
     "type": "git",

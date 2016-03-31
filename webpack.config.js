@@ -9,6 +9,10 @@ module.exports = {
         test: /\.jsx?$/,
         loader: 'babel',
         exclude: /node_modules/
+      },
+      {
+        test:/\.css$/,
+        loaders: ['style','css','autoprefixer']
       }
     ]
   },
