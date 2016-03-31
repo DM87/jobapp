@@ -10,6 +10,7 @@ var browserHistory = ReactRouter.browserHistory;
 var EventEmitter = require('events');
 var hub = new EventEmitter()
 var $ = require('jquery');
+var Modal = require('react-modal');
 
 
 // The main application layout
@@ -51,6 +52,8 @@ var CallTest = React.createClass({
         return {
           tag: "animals",
           files: [],
+          modalIsOpen: false,
+          modalImage: ""
         };
     },
     componentDidMount: function() {
@@ -81,17 +84,58 @@ var CallTest = React.createClass({
       this.LoadTags()
     })
     },
-
+    
+    openModal: function(event,i) {
+      
+      var imageIndex = Number(i.split('$')[1].substring(0,2));
+      var ModalBackground = this.state.files[imageIndex].images.standard_resolution.url
+      // var ModalText = this.state.files[imageIndex].caption.text
+      console.log(imageIndex)
+      this.setState({
+        modalIsOpen: true,
+        modalImage: ModalBackground,
+        // modalText: ModalText,
+      });
+    },
+   
+    closeModal: function() {
+      this.setState({modalIsOpen: false});
+    },
+    
   render: function() {
+    const customStyles = {
+      content : {
+        color                 : 'white',
+        fontSize              : '1em',
+        top                   : '50%',
+        left                  : '50%',
+        right                 : 'auto',
+        bottom                : 'auto',
+        marginRight           : '-50%',
+        transform             : 'translate(-50%, -50%)',
+        textAlign             : "center",
+        background            : "none",
+        border                : "none",
+        padding               : "none"
+      }
+    }
     return (
-      <div className="instabox">
+      <div className="instabox" onScroll={this.LoadTags}>
         {this.state.files.map((file,i) => (
           <div
           key={i}>
-          <img src={file.images.thumbnail.url} onClick={this.FullSize}/>
+          <img src={file.images.thumbnail.url} onClick={this.openModal}/>
           </div>
           ))
         }
+      <Modal
+        isOpen={this.state.modalIsOpen}
+        onRequestClose={this.closeModal}
+        style={customStyles} >
+        <div>
+          <img className="modalimages" src={this.state.modalImage} onClick={this.closeModal}/>
+        </div>
+      </Modal>
       </div>
     );
   }

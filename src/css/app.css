@@ -22,13 +22,13 @@ body {
 
 .instabox {
   margin-top:100px;
-  height:500px;
-  max-width:666px;
+  max-height:420px;
+  max-width:566px;
   background-color: white;
   display:flex;
   flex-wrap: wrap;
   align-items: stretch;
-  overflow: hidden;
+  overflow-y: scroll;
   justify-content: space-around;
 }
 
@@ -96,8 +96,7 @@ body {
     flex-wrap: wrap;
     max-width: 800px;
     margin: auto;
-    margin-top: 10px;
-    padding: 10px;
+    margin-top: 80px;
 }
 
 .toolbarlinks a {
@@ -105,4 +104,28 @@ body {
   font-size: .9em;
   color:#bca41e;
   text-shadow: 1px 1px 1px #be5730;
+  padding: 10px;
+}
+
+/*.modalimages {*/
+/*  position:relative;*/
+/*}*/
+
+/*.imagetext {*/
+/*  position:absolute;*/
+/*  bottom:50px;*/
+/*  left:0;*/
+/*  width:100%;*/
+/*  background:rgba(0, 0, 0, 0.5);*/
+/*}*/
+/*.imagetext p {*/
+/*  padding: 20px;*/
+/*}*/
+
+@media only screen and (max-device-width: 480px) 
+{
+  .instabox {
+  margin-top:140px;
+  max-height:390px;
+  }
 }
