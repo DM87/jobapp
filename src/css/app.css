@@ -10,7 +10,7 @@ body {
   background-image: url('./images/BK_desktop_Bg.png');
   background-size: auto;
   background-position: top center;
-  background-repeat: no-repeat;
+  background-repeat: repeat-x;
   background-color:#1e1e1e;
 }
 
