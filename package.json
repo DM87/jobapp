@@ -35,5 +35,8 @@
     "react-modal": "^0.6.1",
     "react-router": "^2.0.0",
     "webpack": "^1.12.14"
-  }
+  },
+  "engines": {
+    "node": "4.2.4"
+  },
 }
