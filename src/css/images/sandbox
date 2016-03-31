@@ -1,0 +1,33 @@
+ getInitialState: function () {
+        return {
+          tag: "animals",
+          files: [],
+        };
+    },
+    componentDidMount: function() {
+    this.LoadTags()
+    hub.addListener("tag-request", this.ChangeTag);
+    },
+    
+    componentWillUnmount(){
+      hub.removeListener("tag-request");
+    },
+    
+    LoadTags(){
+      var link = "https://crossorigin.me/https://api.instagram.com/v1/tags/"+ this.state.tag + "/media/recent?client_id=7fc34b3e0a1b458e867548097d3c7d5a"
+      var that = this
+      this.serverRequest = $.get(link, function (result) {
+      console.log(result.data)
+      that.setState({
+       files: result.data
+      })
+      })
+    },
+    
+    ChangeTag(x){
+      console.log(x)
+    this.setState({
+      tag:x
+    })
+    this.LoadTags()
+    },
