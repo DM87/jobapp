@@ -58,7 +58,7 @@ body {
   width:293px;
   display:flex;
   top:0;
-  left:50px;
+  left:20%;
   position: fixed;
   justify-content: space-around;
   z-index: 4;
@@ -85,7 +85,7 @@ body {
 
 .dangleDeco {
     top: -165px;
-    left: 77%;
+    left: 67%;
     position: fixed;
     z-index: 3;
 }
@@ -133,5 +133,16 @@ body {
   .instabox {
   margin-top:150px;
   max-height:370px;
+  }
+  .menu {
+    left:5%;
+  }
+  .dangleDeco{
+    top: -40px;
+    left:77%;
+  }
+  .dangleDeco img{
+    width:90%;
+    height:auto;
   }
 }
