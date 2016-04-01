@@ -1,6 +1,5 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-
 var ReactRouter = require('react-router');
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
@@ -12,8 +11,21 @@ var hub = new EventEmitter();
 var $ = require('jquery');
 var Modal = require('react-modal');
 
+//////// APPLICATION COMPONANT ////////////////////////
+var App = React.createClass({
+  render: function() {
+    return (
+      <main>
+        <Menu />
+        <Deco />
+        <InstaBox />
+        <LinkBar />
+      </main>
+    );
+  }
+});
 
-
+/////////// COMPONANT FOR INSTAGRAM API ////////////////////
 var InstaBox = React.createClass({
   render: function(){
     return (
@@ -22,12 +34,7 @@ var InstaBox = React.createClass({
       </div>
       );
   }
-  
-  
 });
-
-
-
 var InstagramBox = React.createClass({
  getInitialState: function () {
         return {
@@ -50,15 +57,13 @@ var InstagramBox = React.createClass({
       var link = "https://crossorigin.me/https://api.instagram.com/v1/tags/"+ this.state.tag + "/media/recent?client_id=7fc34b3e0a1b458e867548097d3c7d5a";
       var that = this;
       this.serverRequest = $.get(link, function (result) {
-      console.log(result.data);
-      that.setState({
-       files: result.data
-      });
+        that.setState({
+         files: result.data
+        });
       });
     },
     
     ChangeTag(x){
-      console.log(x);
     this.setState({
         tag:x
       },function(){
@@ -67,11 +72,9 @@ var InstagramBox = React.createClass({
     },
     
     openModal: function(event,i) {
-      
       var imageIndex = Number(i.split('$')[1].substring(0,2));
       var ModalBackground = this.state.files[imageIndex].images.standard_resolution.url;
       // var ModalText = this.state.files[imageIndex].caption.text
-      console.log(imageIndex);
       this.setState({
         modalIsOpen: true,
         modalImage: ModalBackground,
@@ -121,6 +124,8 @@ var InstagramBox = React.createClass({
   }
 });
 
+
+///////////// COMPONANT FOR THE MENU /////////////////////
 var Menu = React.createClass({
   ChangeTag: function(x,e){
     if (e === ".0.0.0"){
@@ -148,6 +153,7 @@ var Menu = React.createClass({
   }
 });
 
+///////////////// COMPONANT FOR THE DANGLING SPIDER ///////////////////
 var Deco = React.createClass({
   render(){
     return(
@@ -156,7 +162,7 @@ var Deco = React.createClass({
       </div>);
   }
 });
-
+///////////////// COMPONANT FOR THE LINKS BELOW THE APP ////////////////
 var LinkBar = React.createClass({
   render(){
     return (
@@ -171,23 +177,8 @@ var LinkBar = React.createClass({
   }
 });
 
-var App = React.createClass({
-  render: function() {
-    return (
-      <main>
-        <Menu />
-        <Deco />
-        <InstaBox />
-        <LinkBar />
-      </main>
-    );
-  }
-});
 
-
-
-
-// not found "page"
+/////// not found "page" ///////////
 var NotFound = React.createClass({
   render: function() {
     return (
@@ -195,7 +186,7 @@ var NotFound = React.createClass({
     );
   }
 });
-
+/////// router ///////////////
 var routes = (
   <Router history={browserHistory}>
     <Route path="/" component={App}>
@@ -204,5 +195,5 @@ var routes = (
     </Route>
   </Router>
 );
-
+//////// app render ////////////
 ReactDOM.render(routes, document.querySelector('#app'));
