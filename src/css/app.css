@@ -63,6 +63,16 @@ body {
   justify-content: space-around;
   z-index: 4;
 }
+
+@-webkit-keyframes flydown {
+    0% {
+        top:-343px;
+    }
+    100% {
+        top: -165px;
+    }
+}
+
 .menu div{
   height: 148px;
   cursor: pointer;
@@ -88,6 +98,7 @@ body {
     left: 67%;
     position: fixed;
     z-index: 3;
+    animation: flydown 1s  normal ease-in;
 }
 
 .toolbarlinks {
@@ -140,6 +151,7 @@ body {
   .dangleDeco{
     top: -40px;
     left:77%;
+    animation:none;
   }
   .dangleDeco img{
     width:90%;
